@@ -41,6 +41,5 @@ This action measures how long take time for the current workflow based on past r
     repository: GITHUB_REPOSITORY
     run-id: GITHUB_RUN_ID
 - name: Noti expected run time
-  # TODO: on failとon succeedでそれぞれ分けて通知してあげる
   run: echo "This workflow takes ${{steps.predict_run_time.outputs.succeed_average_time}} minutes if successful! If failed, this will fininsh in ${{steps.predict_run_time.outputs.failure_average_time}} on average."
 ```
