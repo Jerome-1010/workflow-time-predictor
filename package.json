@@ -1,0 +1,21 @@
+{
+  "name": "workflow-time-predictor",
+  "version": "0.0.1",
+  "description": "Tells how long take time for run the whole workflow based on past results.",
+  "main": "index.js",
+  "repository": "git@github.com:Jerome-1010/workflow-time-predictor.git",
+  "author": "Jerome-1010",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "esbuild index.js --bundle --platform=node --target=node16.18 --outdir=dist --minify"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "dayjs": "^1.11.6"
+  },
+  "devDependencies": {
+    "esbuild": "^0.15.16"
+  }
+}

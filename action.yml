@@ -1,0 +1,47 @@
+name: 'Workflow Time Predictor'
+description: 'Tells how long take time for the current workflow based on past results.'
+inputs:
+  token:
+    description: 'Assign GITHUB_TOKEN to get history.'
+    type: string
+    required: true
+  owner:
+    description: 'Assign GITHUB_REPOSITORY_OWNER to get history.'
+    type: string
+    required: true
+  repository:
+    description: 'Assign GITHUB_REPOSITORY to get history.'
+    type: string
+    required: true
+  run-id:
+    description: 'Assign GITHUB_RUN_ID to get a workflow ID.'
+    type: string
+    required: true
+  numbers:
+    description: 'How many number of execution history to retrieve retroactively.'
+    type: number
+    required: false
+    default: 50
+outputs:
+  succeed_median_time:
+    description: 'The median take time to run the workflow.'
+  succeed_average_time:
+    description: 'The average take time to run the workflow.'
+  succeed_max_time:
+    description: 'The max take time to run the workflow.'
+  succeed_min_time:
+    description: 'The min take time to run the workflow.'
+  failure_median_time:
+    description: 'The median take time to run the workflow.'
+  failure_average_time:
+    description: 'The average take time to run the workflow.'
+  failure_max_time:
+    description: 'The max take time to run the workflow.'
+  failure_min_time:
+    description: 'The min take time to run the workflow.'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+branding:
+  icon: clock
+  color: purple
