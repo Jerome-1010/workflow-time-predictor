@@ -55,10 +55,10 @@ async function covertHistoriesToResultAsStatus(num, status) {
 `);
 
   return {
-    median: minutes[Math.floor(minutes.length / 2)],
-    average: minutes.reduce((prev, curr) => prev + curr) / minutes.length,
-    max: minutes.slice(-1)[0],
-    min: minutes[0],
+    median: minutes[Math.floor(minutes.length / 2)].toFixed(2),
+    average: (minutes.reduce((prev, curr) => prev + curr) / minutes.length).toFixed(2),
+    max: minutes.slice(-1)[0].toFixed(2),
+    min: minutes[0].toFixed(2),
   }
 }
 
