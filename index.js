@@ -46,7 +46,8 @@ async function getExecutionHistory(num, status) {
 }
 
 async function covertHistoriesToResultAsStatus(num, status) {
-  const minutes = await getExecutionHistory(num, status).reduce(
+  const history = await getExecutionHistory(num, status)
+  const minutes = history.reduce(
     (previous, current) => dayjs(current.created_at).diff(dayjs(current.updated_at), 'minute', true)
   );
   // ascending

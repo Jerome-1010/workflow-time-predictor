@@ -7792,7 +7792,8 @@ async function getExecutionHistory(num, status) {
   return workflow_runs;
 }
 async function covertHistoriesToResultAsStatus(num, status) {
-  const minutes = await getExecutionHistory(num, status).reduce(
+  const history = await getExecutionHistory(num, status);
+  const minutes = history.reduce(
     (previous, current) => (0, import_dayjs.default)(current.created_at).diff((0, import_dayjs.default)(current.updated_at), "minute", true)
   );
   minutes.sort((a, b) => a - b);
