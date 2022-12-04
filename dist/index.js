@@ -16,7 +16,7 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``)}f.g
   status:       ${p}
   num:          ${e}
 ---------- Query Conditions ----------
-`),await t.request("GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs{?status,per_page}",{owner:a,repo:d,workflow_id:s,status:p,per_page:e})}async function Qd(e,p){let a=x0(e,p).reduce((d,r)=>(0,sa.default)(r.created_at).diff((0,sa.default)(r.updated_at),"minute",!0));return a.sort((d,r)=>d-r),(0,Z.debug)(`
+`),await t.request("GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs{?status,per_page}",{owner:a,repo:d,workflow_id:s,status:p,per_page:e}).workflow_runs}async function Qd(e,p){let a=x0(e,p).reduce((d,r)=>(0,sa.default)(r.created_at).diff((0,sa.default)(r.updated_at),"minute",!0));return a.sort((d,r)=>d-r),(0,Z.debug)(`
 ---------- Result Info ----------
   ${p} length: ${a.length}
   ${p} max:    ${a.slice(-1)[0]}

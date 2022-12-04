@@ -36,7 +36,7 @@ async function getExecutionHistory(num, status) {
     workflow_id: workflowID,
     status,
     per_page: num,
-  });
+  }).workflow_runs;
 }
 
 async function covertHistoriesToResultAsStatus(num, status) {
