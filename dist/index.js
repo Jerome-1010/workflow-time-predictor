@@ -7781,13 +7781,15 @@ async function getExecutionHistory(num, status) {
   num:          ${num}
 ---------- Query Conditions ----------
 `);
-  return await octokit.request("GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs{?status,per_page}", {
+  const { workflow_runs } = await octokit.request("GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs{?status,per_page}", {
     owner: OWNER,
     repo: REPO,
     workflow_id: workflowID,
     status,
     per_page: num
-  }).workflow_runs;
+  });
+  console.log(workflow_runs);
+  return workflow_runs;
 }
 async function covertHistoriesToResultAsStatus(num, status) {
   const minutes = getExecutionHistory(num, status).reduce(
