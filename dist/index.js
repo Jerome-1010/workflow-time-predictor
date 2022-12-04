@@ -7768,6 +7768,9 @@ async function getExecutionHistory(num, status) {
     repo: REPO,
     run_id: RUN_ID
   });
+  if (!workflowID) {
+    throw new Error(`Could not get workflow id. owner: ${OWNER}, repo: ${REPO}, run-id: ${RUN_ID}, response: ${workflowID}`);
+  }
   (0, import_core.debug)(`
 ---------- Query Conditions ----------
   owner:        ${OWNER}
