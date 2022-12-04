@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "esbuild index.js --bundle --platform=node --target=node16.18 --outdir=dist --minify"
+    "build": "esbuild index.js --bundle --platform=node --target=node16.18 --outdir=dist"
   },
   "dependencies": {
     "@actions/core": "^1.10.0",
