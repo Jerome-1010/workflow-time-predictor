@@ -12,7 +12,7 @@ async function getExecutionHistory(num, status) {
   const REPO = getInput('repository').replace(`${OWNER}/`, '');
   const RUN_ID = getInput('run-id');
 
-  const octokit = getOctokit({ token: getInput('token') });
+  const octokit = getOctokit(getInput('token'));
   const { workflowID } = await octokit.request('GET /repos/{owner}/{repo}/actions/runs/{run_id}{?exclude_pull_requests}', {
     owner: OWNER,
     repo: REPO,
