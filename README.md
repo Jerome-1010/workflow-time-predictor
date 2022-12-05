@@ -13,7 +13,7 @@ This action measures how long take time for the current workflow based on past r
 | `token` | Required to fetch workflow and repository information. Give `GITHUB_TOKEN`. | y |
 | `owner` | Required to determine which repository to fetch. Give `GITHUB_REPOSITORY_OWNER`. | y |
 | `repository` | Required to determine which repository to fetch. Give `GITHUB_REPOSITORY`. | y |
-| `run-id` | Required to determine which workflow to fetch. Give `GITHUB_RUN_ID`. | y |
+| `workflow-file-name` | Required to determine which repository to fetch. Give `build` if workflow file name is `build.yml`. | y |
 | `numbers` | The number of past results to fetch retroactively. Default value is `50`. | n |
 
 ## Outputs

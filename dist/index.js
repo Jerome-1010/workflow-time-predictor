@@ -7761,33 +7761,27 @@ var import_dayjs = __toESM(require_dayjs_min());
 async function getExecutionHistory(num, status) {
   const OWNER = (0, import_core.getInput)("owner");
   const REPO = (0, import_core.getInput)("repository").replace(`${OWNER}/`, "");
-  const RUN_ID = (0, import_core.getInput)("run-id");
-  const octokit = (0, import_github.getOctokit)((0, import_core.getInput)("token"));
-  const { workflowID } = await octokit.request("GET /repos/{owner}/{repo}/actions/runs/{run_id}{?exclude_pull_requests}", {
-    owner: OWNER,
-    repo: REPO,
-    run_id: RUN_ID
-  });
-  if (!workflowID) {
-    throw new Error(`Could not get workflow id. owner: ${OWNER}, repo: ${REPO}, run-id: ${RUN_ID}, response: ${workflowID}`);
-  }
-  (0, import_core.debug)(`
+  const WORKFLOW_FILE_NAME = (0, import_core.getInput)("workflow-file-name");
+  console.log(`
 ---------- Query Conditions ----------
-  owner:        ${OWNER}
-  repository:   ${REPO}
-  run id:       ${RUN_ID}
-  workflow id:  ${workflowID}
-  status:       ${status}
-  num:          ${num}
+  owner:              ${OWNER}
+  repository:         ${REPO}
+  workflow file name: ${WORKFLOW_FILE_NAME}
+  status:             ${status}
+  num:                ${num}
 ---------- Query Conditions ----------
 `);
+  const octokit = (0, import_github.getOctokit)((0, import_core.getInput)("token"));
   const { workflow_runs } = await octokit.request("GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs{?status,per_page}", {
     owner: OWNER,
     repo: REPO,
-    workflow_id: workflowID,
+    workflow_id: WORKFLOW_FILE_NAME,
     status,
     per_page: num
   });
+  if (typeof workflow_runs === "undefined") {
+    throw new Error("Unexpected workflow history.");
+  }
   console.log(workflow_runs);
   return workflow_runs;
 }

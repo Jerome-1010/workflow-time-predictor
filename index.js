@@ -10,37 +10,29 @@ import dayjs from 'dayjs';
 async function getExecutionHistory(num, status) {
   const OWNER = getInput('owner');
   const REPO = getInput('repository').replace(`${OWNER}/`, '');
-  const RUN_ID = getInput('run-id');
+  const WORKFLOW_FILE_NAME = getInput('workflow-file-name');
 
-  const octokit = getOctokit(getInput('token'));
-  const { workflowID } = await octokit.request('GET /repos/{owner}/{repo}/actions/runs/{run_id}{?exclude_pull_requests}', {
-    owner: OWNER,
-    repo: REPO,
-    run_id: RUN_ID,
-  });
-
-  if (!workflowID) {
-    throw new Error(`Could not get workflow id. owner: ${OWNER}, repo: ${REPO}, run-id: ${RUN_ID}, response: ${workflowID}`);
-  }
-
-  debug(`
+  console.log(`
 ---------- Query Conditions ----------
-  owner:        ${OWNER}
-  repository:   ${REPO}
-  run id:       ${RUN_ID}
-  workflow id:  ${workflowID}
-  status:       ${status}
-  num:          ${num}
+  owner:              ${OWNER}
+  repository:         ${REPO}
+  workflow file name: ${WORKFLOW_FILE_NAME}
+  status:             ${status}
+  num:                ${num}
 ---------- Query Conditions ----------
 `);
 
+  const octokit = getOctokit(getInput('token'));
   const { workflow_runs } = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs{?status,per_page}', {
     owner: OWNER,
     repo: REPO,
-    workflow_id: workflowID,
+    workflow_id: WORKFLOW_FILE_NAME,
     status,
     per_page: num,
   });
+  if (typeof workflow_runs === 'undefined') {
+    throw new Error('Unexpected workflow history.');
+  }
   console.log(workflow_runs);
   return workflow_runs;
 }

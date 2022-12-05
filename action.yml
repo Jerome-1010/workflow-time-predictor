@@ -13,8 +13,8 @@ inputs:
     description: 'Required to determine which repository to fetch. Give `GITHUB_REPOSITORY`.'
     type: string
     required: true
-  run-id:
-    description: 'Required to determine which workflow to fetch. Give `GITHUB_RUN_ID`.'
+  workflow-file-name:
+    description: 'Required to determine which repository to fetch. Give `build` if workflow file name is build.yml.'
     type: string
     required: true
   numbers:
