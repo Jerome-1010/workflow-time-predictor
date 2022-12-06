@@ -23,7 +23,7 @@ async function getExecutionHistory(num, status) {
 `);
 
   const octokit = getOctokit(getInput('token'));
-  const { workflow_runs } = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs{?status,per_page}', {
+  const { workflow_runs } = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs', {
     owner: OWNER,
     repo: REPO,
     workflow_id: WORKFLOW_FILE_NAME,
