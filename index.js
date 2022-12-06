@@ -23,17 +23,19 @@ async function getExecutionHistory(num, status) {
 `);
 
   const octokit = getOctokit(getInput('token'));
-  const { workflow_runs } = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs', {
+  const res = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs', {
     owner: OWNER,
     repo: REPO,
     workflow_id: WORKFLOW_FILE_NAME,
     status,
     per_page: num,
   });
+  const workflow_runs = res.workflow_runs;
+  console.log(res);
+  console.log(workflow_runs);
   if (typeof workflow_runs === 'undefined') {
     throw new Error('Unexpected workflow history.');
   }
-  console.log(workflow_runs);
   return workflow_runs;
 }
 
