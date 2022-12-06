@@ -10,10 +10,10 @@ This action measures how long take time for the current workflow based on past r
 
 | Input | Description | Required |
 | ---- | ---- | ---- |
-| `token` | Required to fetch workflow and repository information. Give `GITHUB_TOKEN`. | y |
-| `owner` | Required to determine which repository to fetch. Give `GITHUB_REPOSITORY_OWNER`. | y |
-| `repository` | Required to determine which repository to fetch. Give `GITHUB_REPOSITORY`. | y |
-| `workflow-file-name` | Required to determine which repository to fetch. Give `build` if workflow file name is `build.yml`. | y |
+| `token` | Required to fetch workflow and repository information. Give `${{ secrets.GITHUB_TOKEN }}`. | y |
+| `owner` | Required to determine which repository to fetch. Give `${{ github.repository_owner }}`. | y |
+| `repository` | Required to determine which repository to fetch. Give `${{ github.repository_owner }}`. | y |
+| `workflow-file-name` | Required to determine which repository to fetch. Give `build.yml` if your workflow file name is build.yml. | y |
 | `numbers` | The number of past results to fetch retroactively. Default value is `50`. | n |
 
 ## Outputs
@@ -31,15 +31,15 @@ This action measures how long take time for the current workflow based on past r
 
 ## Example usage
 
-```yaml
+```yml:build.yml
 - name: Predict run time
   id: predict_run_time
-  uses: jerome-1010/workflow-time-predictor@v1
+  uses: jerome-1010/workflow-time-predictor
   with:
-    token: GITHUB_TOKEN
-    owner: GITHUB_REPOSITORY_OWNER
-    repository: GITHUB_REPOSITORY
-    run-id: GITHUB_RUN_ID
+    token: ${{ secrets.GITHUB_TOKEN }}
+    owner: ${{ github.repository_owner }}
+    repository: ${{ github.repository_owner }}
+    workflow-file-name: "build.yml"
 - name: Noti expected run time
   run: echo "This workflow takes ${{steps.predict_run_time.outputs.succeed_average_time}} minutes if successful! If failed, this will fininsh in ${{steps.predict_run_time.outputs.failure_average_time}} on average."
 ```

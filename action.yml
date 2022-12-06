@@ -14,7 +14,7 @@ inputs:
     type: string
     required: true
   workflow-file-name:
-    description: 'Required to determine which repository to fetch. Give `build` if workflow file name is build.yml.'
+    description: 'Required to determine which repository to fetch. Give `build.yml` if your workflow file name is build.yml.'
     type: string
     required: true
   numbers:
