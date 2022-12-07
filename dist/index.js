@@ -7769,7 +7769,7 @@ async function getExecutionHistory(num, status) {
   workflow file name: ${WORKFLOW_FILE_NAME}
   status:             ${status}
   num:                ${num}
----------- Query Conditions ----------
+--------------------------------------
 `);
   const octokit = (0, import_github.getOctokit)((0, import_core.getInput)("token"));
   const { data } = await octokit.request("GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs", {
@@ -7802,7 +7802,7 @@ async function covertHistoriesToResultAsStatus(num, status) {
   ${status} length: ${minutes.length}
   ${status} max:    ${minutes.slice(-1)[0]}
   ${status} min:    ${minutes[0]}v
----------- Result Info ----------
+---------------------------------
 `);
   return {
     median: getMedian(minutes),
@@ -7840,14 +7840,12 @@ try {
       failure_max_time: failure.max,
       failure_min_time: failure.min
     };
-    console.log(`
----------- Result ----------
-  ${result}
----------- Result ----------
-`);
+    console.log("---------- Result ----------");
     Object.keys(result).forEach((k) => {
+      console.log(`${k}: ${result[k]}`);
       (0, import_core.setOutput)(k, result[k]);
     });
+    console.log("----------------------------");
     console.log("\u2728Done!");
   });
 } catch (error) {
