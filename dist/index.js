@@ -7842,7 +7842,7 @@ try {
     };
     console.log("---------- Result ----------");
     Object.keys(result).forEach((k) => {
-      console.log(`${k}: ${result[k]}`);
+      console.log(`${k}: ${result[k]} min`);
       (0, import_core.setOutput)(k, result[k]);
     });
     console.log("----------------------------");

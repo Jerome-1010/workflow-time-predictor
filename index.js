@@ -103,7 +103,7 @@ try {
     }
     console.log('---------- Result ----------');
     Object.keys(result).forEach(k => {
-      console.log(`${k}: ${result[k]}`);
+      console.log(`${k}: ${result[k]} min`);
       setOutput(k, result[k]);
     });
     console.log('----------------------------');
