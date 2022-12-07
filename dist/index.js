@@ -7840,7 +7840,11 @@ try {
       failure_max_time: failure.max,
       failure_min_time: failure.min
     };
-    (0, import_core.debug)(`result: ${result}`);
+    console.log(`
+---------- Result ----------
+  ${result}
+---------- Result ----------
+`);
     Object.keys(result).forEach((k) => {
       (0, import_core.setOutput)(k, result[k]);
     });

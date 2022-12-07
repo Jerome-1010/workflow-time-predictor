@@ -101,7 +101,11 @@ try {
       failure_max_time: failure.max,
       failure_min_time: failure.min,
     }
-    debug(`result: ${result}`);
+    console.log(`
+---------- Result ----------
+  ${result}
+---------- Result ----------
+`);
     Object.keys(result).forEach(k => {
       setOutput(k, result[k]);
     });
