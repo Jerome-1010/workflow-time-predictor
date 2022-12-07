@@ -49,6 +49,16 @@ function getMedian(minutes) {
 
 async function covertHistoriesToResultAsStatus(num, status) {
   const history = await getExecutionHistory(num, status)
+  if (!history.length) {
+    console.log('The history not found.');
+    return {
+      median: 0,
+      average: 0,
+      max: 0,
+      min: 0,
+    }
+  }
+
   const minutes = history.map(h => dayjs(h.updated_at).diff(dayjs(h.created_at), 'minute', true));
   // ascending
   minutes.sort((a, b) => a - b);
