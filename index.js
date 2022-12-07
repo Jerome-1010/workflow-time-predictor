@@ -91,11 +91,11 @@ try {
       failure_min_time: failure.min,
     }
     debug(`result: ${result}`);
-    result.keys().forEach(k => {
+    Object.keys(result).forEach(k => {
       setOutput(k, result[k]);
-    })
+    });
 
-    console.log('✨Done!')
+    console.log('✨Done!');
   });
 } catch (error) {
   setFailed(error.message);
