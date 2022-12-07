@@ -7786,9 +7786,7 @@ async function getExecutionHistory(num, status) {
 }
 async function covertHistoriesToResultAsStatus(num, status) {
   const history = await getExecutionHistory(num, status);
-  const minutes = history.reduce(
-    (previous, current) => (0, import_dayjs.default)(current.created_at).diff((0, import_dayjs.default)(current.updated_at), "minute", true)
-  );
+  const minutes = history.map((h) => (0, import_dayjs.default)(h.created_at).diff((0, import_dayjs.default)(h.updated_at), "minute", true));
   minutes.sort((a, b) => a - b);
   (0, import_core.debug)(`
 ---------- Result Info ----------
