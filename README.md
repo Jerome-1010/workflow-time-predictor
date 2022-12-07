@@ -34,12 +34,26 @@ This action measures how long take time for the current workflow based on past r
 ```yml:build.yml
 - name: Predict run time
   id: predict_run_time
-  uses: jerome-1010/workflow-time-predictor
+  uses: jerome-1010/workflow-time-predictor@v1
   with:
     token: ${{ secrets.GITHUB_TOKEN }}
     owner: ${{ github.repository_owner }}
     repository: ${{ github.repository_owner }}
     workflow-file-name: "build.yml"
 - name: Noti expected run time
-  run: echo "This workflow takes ${{steps.predict_run_time.outputs.succeed_average_time}} minutes if successful! If failed, this will fininsh in ${{steps.predict_run_time.outputs.failure_average_time}} on average."
+  run: echo "succeed_median_time is ${{steps.predict_run_time.outputs.succeed_median_time}}"
+```
+
+Or you can also see the results output on the job details page as well.
+```
+---------- Result ----------
+succeed_median_time: 0.23 min
+succeed_average_time: 18.91 min
+succeed_max_time: 461.60 min
+succeed_min_time: 0.00 min
+failure_median_time: 0.22 min
+failure_average_time: 7.35 min
+failure_max_time: 180.32 min
+failure_min_time: 0.00 min
+----------------------------
 ```
