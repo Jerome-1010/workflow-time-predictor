@@ -1,6 +1,6 @@
 {
   "name": "workflow-time-predictor",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Tells how long take time for run the whole workflow based on past results.",
   "main": "index.js",
   "repository": "git@github.com:Jerome-1010/workflow-time-predictor.git",
