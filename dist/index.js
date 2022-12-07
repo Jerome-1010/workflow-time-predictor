@@ -7784,6 +7784,15 @@ async function getExecutionHistory(num, status) {
   }
   return data.workflow_runs;
 }
+function getMedian(minutes) {
+  let median;
+  if (minutes.length % 2 === 0) {
+    median = (minutes[Math.floor(minutes.length / 2)] + minutes[Math.floor(minutes.length / 2) + 1]) / 2;
+  } else {
+    median = minutes[Math.floor(minutes.length / 2)];
+  }
+  return median.toFixed(2);
+}
 async function covertHistoriesToResultAsStatus(num, status) {
   const history = await getExecutionHistory(num, status);
   const minutes = history.map((h) => (0, import_dayjs.default)(h.updated_at).diff((0, import_dayjs.default)(h.created_at), "minute", true));
@@ -7796,7 +7805,7 @@ async function covertHistoriesToResultAsStatus(num, status) {
 ---------- Result Info ----------
 `);
   return {
-    median: minutes[Math.floor(minutes.length / 2)].toFixed(2),
+    median: getMedian(minutes),
     average: (minutes.reduce((prev, curr) => prev + curr) / minutes.length).toFixed(2),
     max: minutes.slice(-1)[0].toFixed(2),
     min: minutes[0].toFixed(2)
